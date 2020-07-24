@@ -1,0 +1,12 @@
+POST http://localhost:8070/user/registration
+Content-Type: application/json
+Authorization: Basic test test
+
+{
+  "email": "string_",
+  "password": "string",
+  "passwordConfirmation": "string"
+
+}
+
+###
