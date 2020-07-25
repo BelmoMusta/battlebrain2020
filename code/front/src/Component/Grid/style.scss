@@ -1,0 +1,8 @@
+.co-grid{
+    &--flex-end{
+        padding-right: 0 !important;
+        > .MuiGrid-item:last-child{
+            padding-right: 0;
+        }
+    }
+} 
