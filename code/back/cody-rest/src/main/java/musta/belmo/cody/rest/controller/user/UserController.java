@@ -2,7 +2,7 @@ package musta.belmo.cody.rest.controller.user;
 
 
 import musta.belmo.cody.model.UserRegistrationDTO;
-import musta.belmo.cody.rest.controller.swagger.SwaggerableController;
+import musta.belmo.cody.rest.controller.AbstractController;
 import musta.belmo.cody.service.api.user.UserService;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,9 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/user")
 
-public class UserController implements SwaggerableController {
+public class UserController extends AbstractController {
 
     public static final String USER = "User";
-    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {

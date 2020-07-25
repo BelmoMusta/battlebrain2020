@@ -35,6 +35,7 @@
         <module>cody-mapper</module>
         <module>cody-config</module>
         <module>cody-test</module>
+        <module>cody-dao-impl</module>
     </modules>
     <packaging>pom</packaging>
     <parent>

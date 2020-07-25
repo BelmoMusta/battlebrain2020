@@ -2,6 +2,7 @@ package musta.belmo.cody.service.impl.seat;
 
 import com.querydsl.core.types.Predicate;
 import musta.belmo.cody.dao.seat.SeatRepository;
+import musta.belmo.cody.data.model.places.Seat;
 import musta.belmo.cody.data.model.staff.User;
 import musta.belmo.cody.model.SeatDTO;
 import musta.belmo.cody.service.api.exceptions.ApplicationException;
@@ -20,14 +21,15 @@ import java.util.stream.Collectors;
 public class SeatServiceImpl extends AbstractCommonService implements SeatService {
 	@Autowired
 	private SeatRepository seatRepository;
-    
-    
-    @Override
-    public SeatDTO create(SeatDTO seatDTO) {
-        return null;
-    }
-    
-    @Override
+	
+	
+	@Override
+	public SeatDTO create(SeatDTO seatDTO) {
+		seatRepository.save(domainDTOMapper.toDomain(seatDTO));
+		return seatDTO;
+	}
+	
+	@Override
 	public Optional<SeatDTO> findOne(final Long id) {
 		return Optional.ofNullable(seatRepository.findOne(id))
 				.map(domainDTOMapper::toDTO);
@@ -56,25 +58,25 @@ public class SeatServiceImpl extends AbstractCommonService implements SeatServic
 	}
 	
 	
-    @Override
+	@Override
 	public Page<SeatDTO> getAllByQueryDsl(Predicate predicate, Pageable pageable) {
 		return seatRepository.findAll(predicate, pageable)
 				.map(domainDTOMapper::toDTO);
 		
 	}
-    
-    @Override
-    public Set<SeatDTO> findSaved() {
-        return null;
-    }
-    
-    @Override
-    public SeatDTO share(Long id, String additionalContent) {
-        return null;
-    }
-    
-    
-    @Override
+	
+	@Override
+	public Set<SeatDTO> findSaved() {
+		return null;
+	}
+	
+	@Override
+	public SeatDTO share(Long id, String additionalContent) {
+		return null;
+	}
+	
+	
+	@Override
 	public SeatDTO update(SeatDTO seat) {
 		return Optional.ofNullable(seat)
 				.map(domainDTOMapper::toDomain)

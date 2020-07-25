@@ -32,8 +32,14 @@
         <dependency>
             <groupId>musta.belmo</groupId>
             <artifactId>cody-mapper</artifactId>
-            <version>1.0</version>
+            <version>${project.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>musta.belmo</groupId>
+            <artifactId>cody-dao-impl</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
