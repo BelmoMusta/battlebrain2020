@@ -34,6 +34,7 @@ Then run the java command :
  INSERT INTO `cody`.`user` (`created_at`, `updated_at`, `email`, `password`, `team_id`) VALUES (null, null, 'test', '$2a$10$aL3BJmOMQEPPAaerlG8J9OBq7t4RcKNJlQIRI/ohu4McZ4xEzkDju', null)
 ```
 4. Go to `http://localhost:8070/swagger-ui.html`
+
 5.Connect to the swagger UI : user `test`, password `test`
 ## Missing artifacts:  
 1. Solution screencast
