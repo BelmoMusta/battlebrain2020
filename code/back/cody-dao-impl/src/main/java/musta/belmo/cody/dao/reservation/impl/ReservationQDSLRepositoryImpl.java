@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 
 @Repository
-public class ReservationQDSLRepositoryImpl extends AbstractQDSLRepositoryImpl implements ReservationQDSLRepository {
+public class ReservationQDSLRepositoryImpl extends AbstractQDSLRepositoryImpl<Reservation> implements ReservationQDSLRepository {
 	
 	@Override
 	public boolean checkAvailability(Long seatId, LocalDateTime startsAt, LocalDateTime endsAt) {

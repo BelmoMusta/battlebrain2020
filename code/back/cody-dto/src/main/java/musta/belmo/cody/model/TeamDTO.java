@@ -3,7 +3,6 @@ package musta.belmo.cody.model;
 import lombok.Data;
 
 @Data
-
-public class RoleDTO extends AbstractDTO {
+public class TeamDTO extends AbstractDTO {
 	private String name;
 }

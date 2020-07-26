@@ -9,13 +9,13 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 
 @Repository
-public class AbstractQDSLRepositoryImpl {
+public class AbstractQDSLRepositoryImpl<T> {
 	
 	@Autowired
 	@Qualifier(value = "entityManagerFactory")
 	private EntityManager entityManager;
 	
-	protected JPAQuery<Reservation> getJpaQuery() {
+	protected JPAQuery<T> getJpaQuery() {
 		return new JPAQuery<>(entityManager);
 	}
 }

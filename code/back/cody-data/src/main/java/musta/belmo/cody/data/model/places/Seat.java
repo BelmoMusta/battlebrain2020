@@ -18,4 +18,8 @@ public class Seat extends AbstractDataModel {
 	@JoinColumn(name = "room_id")
 	private Room room;
 	
+	private Integer lineNumber; // admin can define them
+	
+	private Integer columnNumber; // admin can define this
+	
 }

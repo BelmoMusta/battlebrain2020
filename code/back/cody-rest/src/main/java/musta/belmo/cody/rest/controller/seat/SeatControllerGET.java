@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -28,6 +29,20 @@ public class SeatControllerGET extends AbstractSeatController {
 	public SeatDTO findOne(@PathVariable Long id) {
 		return seatService.findOne(id, userService.getConnectedUser())
 				.orElseThrow(ContentNotFoundException::new);
+	}
+	
+	@GetMapping("/floor/{floorId}")
+	@ApiOperation("gets a seat by its floor id")
+	@IsMember
+	public List<SeatDTO> getAllSeatsAtFloor(@PathVariable Long floorId) {
+		return seatService.getAllSeatsAtFloor(floorId);
+	}
+	
+	@GetMapping("/room/{roomId}")
+	@ApiOperation("gets a seat by its room id")
+	@IsMember
+	public List<SeatDTO> getAllSeatsAtRoom(@PathVariable Long roomId) {
+		return seatService.getAllSeatsAtRoom(roomId);
 	}
 	
 	@GetMapping("/test/{id}")

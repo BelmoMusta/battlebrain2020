@@ -17,6 +17,7 @@ import org.springframework.data.querydsl.binding.SingleValueBinding;
 
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -60,4 +61,10 @@ public interface SeatService extends AbstractCrudService<SeatDTO>, QuerydslBinde
     Set<SeatDTO> findSaved();
 
     SeatDTO share(Long id, String additionalContent);
+    
+    List<SeatDTO> getAllSeatsAtFloor(Long floorId);
+    
+    List<SeatDTO> getAllSeatsAtRoom(Long roomId);
+    
+    void createAtRoom(SeatDTO seat, Long roomId);
 }

@@ -2,9 +2,11 @@ package musta.belmo.cody.rest.controller.seat;
 
 import io.swagger.annotations.ApiOperation;
 import musta.belmo.cody.model.SeatDTO;
+import musta.belmo.cody.rest.annotation.IsAdmin;
 import musta.belmo.cody.rest.annotation.IsMember;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,16 @@ public class SeatControllerPOST extends AbstractSeatController {
 	@IsMember
 	public ResponseEntity<SeatDTO> create(final @RequestBody SeatDTO seat) {
 		seatService.create(seat);
+		return ResponseEntity.ok(seat);
+		
+	}
+	
+	@PostMapping(value = "/{roomId}", consumes = "application/json")
+	@ApiOperation("Create a new seat")
+	@IsAdmin
+	public ResponseEntity<SeatDTO> createAtRoom(final @RequestBody SeatDTO seat, @PathVariable Long roomId) {
+		
+		seatService.createAtRoom(seat, roomId);
 		return ResponseEntity.ok(seat);
 		
 	}

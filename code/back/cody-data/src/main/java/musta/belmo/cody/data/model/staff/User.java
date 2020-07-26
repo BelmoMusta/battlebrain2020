@@ -1,5 +1,6 @@
 package musta.belmo.cody.data.model.staff;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import musta.belmo.cody.data.model.common.AbstractDataModel;
@@ -19,14 +20,13 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-
+@EqualsAndHashCode(of = "email", callSuper = false)
 @Table(uniqueConstraints = @UniqueConstraint(name="userMailShouldBeUnique", columnNames = "email"))
 
 public class User extends AbstractDataModel {
     
     private String email;
-
-   
+    
     private char[] password;
     
     @ManyToOne(fetch = FetchType.LAZY)
@@ -44,22 +44,4 @@ public class User extends AbstractDataModel {
         return false;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        final boolean equals;
-        if (this == o) {
-            equals = true;
-        } else if (!(o instanceof User) || !super.equals(o)) {
-            equals = false;
-        } else {
-            User user = (User) o;
-            equals = Objects.equals(email, user.email);
-        }
-        return equals;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), email);
-    }
 }
