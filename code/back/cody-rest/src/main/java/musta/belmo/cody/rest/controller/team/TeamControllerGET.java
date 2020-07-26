@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class TeamControllerGET extends AbstractTeamController {
 	
@@ -17,5 +19,12 @@ public class TeamControllerGET extends AbstractTeamController {
 	public TeamDTO findOne(@PathVariable Long id) {
 		return teamService.findOne(id)
 				.orElseThrow(ContentNotFoundException::new);
+	}
+	
+	@GetMapping("/")
+	@ApiOperation("gets all the teams")
+	@IsMember
+	public List<TeamDTO> findAll() {
+		return teamService.findAll();
 	}
 }

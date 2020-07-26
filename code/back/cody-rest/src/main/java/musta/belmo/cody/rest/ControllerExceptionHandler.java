@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.io.IOException;
+
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {ApplicationException.class})
@@ -29,6 +31,14 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {DataIntegrityViolationException.class})
     public ResponseEntity handleOthers(DataIntegrityViolationException e, WebRequest request) {
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(e.getMessage());
+
+    }
+    
+    @ExceptionHandler(value = {IOException.class})
+    public ResponseEntity handleOthers(IOException e, WebRequest request) {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(e.getMessage());

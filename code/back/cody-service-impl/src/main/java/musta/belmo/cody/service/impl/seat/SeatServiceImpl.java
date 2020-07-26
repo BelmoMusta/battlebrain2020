@@ -73,23 +73,6 @@ public class SeatServiceImpl extends AbstractCommonService implements SeatServic
 	
 	
 	@Override
-	public Page<SeatDTO> getAllByQueryDsl(Predicate predicate, Pageable pageable) {
-		return seatRepository.findAll(predicate, pageable)
-				.map(domainDTOMapper::toDTO);
-		
-	}
-	
-	@Override
-	public Set<SeatDTO> findSaved() {
-		return null;
-	}
-	
-	@Override
-	public SeatDTO share(Long id, String additionalContent) {
-		return null;
-	}
-	
-	@Override
 	public List<SeatDTO> getAllSeatsAtFloor(Long floorId) {
 		return seatQDSLRepository.getAllSeatsAtFloor(floorId)
 				.stream()
@@ -148,5 +131,13 @@ public class SeatServiceImpl extends AbstractCommonService implements SeatServic
 	@Override
 	public void delete(Long id) {
 		findOne(id).ifPresent(this::delete);
+	}
+	
+	@Override
+	public List<SeatDTO> getReservationsInAGivenRoom(Long roomId) {
+		return seatQDSLRepository.getReservationsInAGivenRoom(roomId)
+				.stream()
+				.map(domainDTOMapper::toDTO)
+				.collect(Collectors.toList());
 	}
 }

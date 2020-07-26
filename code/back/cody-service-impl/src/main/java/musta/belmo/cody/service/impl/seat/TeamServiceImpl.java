@@ -8,7 +8,9 @@ import musta.belmo.cody.service.impl.AbstractCommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TeamServiceImpl extends AbstractCommonService implements TeamService {
@@ -24,5 +26,12 @@ public class TeamServiceImpl extends AbstractCommonService implements TeamServic
 	@Override
 	public void create(TeamDTO teamDTO) {
 		teamRepository.save(domainDTOMapper.toDomain(teamDTO));
+	}
+	
+	@Override
+	public List<TeamDTO> findAll() {
+		return teamRepository.findAll().stream()
+				.map(domainDTOMapper::toDTO)
+				.collect(Collectors.toList());
 	}
 }
