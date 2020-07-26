@@ -11,7 +11,7 @@ import java.util.Date;
 @Setter
 public class ReservationDTO extends AbstractDTO {
 	
-	private Long seatId;
+	private SeatDTO seat;
 	@ApplicationTimeFormat
 	private LocalDateTime startsAt;
 	@ApplicationTimeFormat

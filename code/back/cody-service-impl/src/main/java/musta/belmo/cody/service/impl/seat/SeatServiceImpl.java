@@ -72,22 +72,6 @@ public class SeatServiceImpl extends AbstractCommonService implements SeatServic
 	}
 	
 	
-	@Override
-	public Page<SeatDTO> getAllByQueryDsl(Predicate predicate, Pageable pageable) {
-		return seatRepository.findAll(predicate, pageable)
-				.map(domainDTOMapper::toDTO);
-		
-	}
-	
-	@Override
-	public Set<SeatDTO> findSaved() {
-		return null;
-	}
-	
-	@Override
-	public SeatDTO share(Long id, String additionalContent) {
-		return null;
-	}
 	
 	@Override
 	public List<SeatDTO> getAllSeatsAtFloor(Long floorId) {

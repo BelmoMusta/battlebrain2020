@@ -4,5 +4,5 @@ import java.time.LocalDateTime;
 
 public interface ReservationQDSLRepository  {
 	
-	 boolean checkAvailability(Long seatId, LocalDateTime startsAt, LocalDateTime endsAt);
+	 boolean checkAvailabilityInAGivenIntervalle(Long seatId, LocalDateTime startsAt, LocalDateTime endsAt);
 }

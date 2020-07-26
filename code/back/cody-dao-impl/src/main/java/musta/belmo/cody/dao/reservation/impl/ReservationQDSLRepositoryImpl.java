@@ -14,10 +14,9 @@ import java.time.LocalDateTime;
 public class ReservationQDSLRepositoryImpl extends AbstractQDSLRepositoryImpl<Reservation> implements ReservationQDSLRepository {
 	
 	@Override
-	public boolean checkAvailability(Long seatId, LocalDateTime startsAt, LocalDateTime endsAt) {
+	public boolean checkAvailabilityInAGivenIntervalle(Long seatId, LocalDateTime startsAt, LocalDateTime endsAt) {
 		final JPAQuery<Reservation> jpaQuery = getJpaQuery();
 		
-		// (StartDate1 <= EndDate2) and (StartDate2 <= EndDate1)
 		final BooleanExpression seatPredicate = QReservation.reservation.seat.id.eq(seatId);
 		final BooleanExpression endsAtPredicate = QReservation.reservation.endsAt.goe(startsAt);
 		final BooleanExpression startsAtPredicate = QReservation.reservation.startsAt.loe(endsAt);

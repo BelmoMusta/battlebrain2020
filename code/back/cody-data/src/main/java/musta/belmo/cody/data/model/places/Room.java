@@ -24,4 +24,6 @@ public class Room extends AbstractDataModel {
 	
 	@OneToMany(mappedBy = "room")
 	private Set<Seat> seats;
+	
+	private Integer maxCapacity;
 }

@@ -2,16 +2,19 @@ package musta.belmo.cody.service.impl.reservation;
 
 import musta.belmo.cody.dao.reservation.ReservationQDSLRepository;
 import musta.belmo.cody.dao.reservation.ReservationRepository;
-import musta.belmo.cody.data.model.places.Seat;
 import musta.belmo.cody.data.model.scheduling.Reservation;
+import musta.belmo.cody.model.AbstractDTO;
 import musta.belmo.cody.model.ReservationDTO;
+import musta.belmo.cody.model.RoomDTO;
+import musta.belmo.cody.model.SeatDTO;
 import musta.belmo.cody.service.api.exceptions.SeatAlreadyReservedException;
 import musta.belmo.cody.service.api.reservation.ReservationService;
+import musta.belmo.cody.service.api.seat.RoomService;
+import musta.belmo.cody.service.api.seat.SeatService;
 import musta.belmo.cody.service.impl.AbstractCommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 
@@ -23,23 +26,52 @@ public class ReservationServiceImpl extends AbstractCommonService implements Res
 	@Autowired
 	private ReservationQDSLRepository reservationQDSLRepository;
 	
+	@Autowired
+	private RoomService roomService;
+	
+	@Autowired
+	private SeatService seatService;
+	
 	@Override
-	public boolean checkAvailability(Long seatId, LocalDateTime startsAt, LocalDateTime endsAt) {
-		return reservationQDSLRepository.checkAvailability(seatId, startsAt, endsAt);
+	public boolean checkAvailability(ReservationDTO reservationDTO) {
+		final Long seatId = Optional.ofNullable(reservationDTO.getSeat())
+				.map(AbstractDTO::getId)
+				.orElse(-1L);
+		
+		
+		final boolean availableOnDateIntervalle = reservationQDSLRepository
+				.checkAvailabilityInAGivenIntervalle(seatId,
+						reservationDTO.getStartsAt(),
+						reservationDTO.getEndsAt());
+		return availableOnDateIntervalle && !isRoomFull(seatId);
+	}
+	
+	private boolean isRoomFull(Long seatId) {
+		final Optional<SeatDTO> optionalSeat = seatService.findOne(seatId);
+		
+		boolean roomIsFull = false;
+		if (optionalSeat.isPresent()) {
+			final Long roomId = optionalSeat.map(SeatDTO::getRoom)
+					.map(AbstractDTO::getId)
+					.orElse(-1L);
+			final Optional<RoomDTO> optionalRoom = roomService.findOne(roomId);
+			if (optionalRoom.isPresent()) {
+				final RoomDTO roomDTO = optionalRoom.get();
+				final int size = roomDTO.getSeats().size();
+				roomIsFull = (size - 1 < roomDTO.getMaxCapacity());
+				
+			}
+		}
+		return roomIsFull;
 	}
 	
 	@Override
 	public void reserve(ReservationDTO reservationDTO) {
-		final Long seatId = reservationDTO.getSeatId();
-		final boolean isAvailable = checkAvailability(seatId, reservationDTO.getStartsAt(),
-				reservationDTO.getEndsAt());
+		
+		final boolean isAvailable = checkAvailability(reservationDTO);
 		if (isAvailable) {
-			final Seat seat = new Seat();
-			seat.setId(seatId);
-			
 			final Reservation reservation = domainDTOMapper.toDomain(reservationDTO);
 			reservation.setUser(getConnectedUser());
-			reservation.setSeat(seat);
 			reservationRepository.save(reservation);
 		} else {
 			throw new SeatAlreadyReservedException();

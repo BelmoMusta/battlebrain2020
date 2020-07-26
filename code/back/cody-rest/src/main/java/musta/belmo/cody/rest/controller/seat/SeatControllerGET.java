@@ -59,13 +59,4 @@ public class SeatControllerGET extends AbstractSeatController {
 	public Set<SeatDTO> findAll() {
 		return seatService.findAllForUser();
 	}
-	
-	@GetMapping("/search")
-	public Page<SeatDTO> getAllByQueryDsl(
-			@QuerydslPredicate(root = Seat.class, bindings = SeatService.class) Predicate predicate,
-			@PageableDefault(sort = {"createdAt"}, direction = Sort.Direction.DESC) SearchSeatDTO
-					
-					example, Pageable pageable) {
-		return seatService.getAllByQueryDsl(predicate, pageable);
-	}
 }
