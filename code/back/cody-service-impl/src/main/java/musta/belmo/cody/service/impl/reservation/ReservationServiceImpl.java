@@ -2,9 +2,14 @@ package musta.belmo.cody.service.impl.reservation;
 
 import musta.belmo.cody.dao.reservation.ReservationQDSLRepository;
 import musta.belmo.cody.dao.reservation.ReservationRepository;
+import musta.belmo.cody.data.model.places.Floor;
+import musta.belmo.cody.data.model.places.Room;
+import musta.belmo.cody.data.model.places.Seat;
 import musta.belmo.cody.data.model.scheduling.Reservation;
+import musta.belmo.cody.data.model.staff.User;
 import musta.belmo.cody.model.AbstractDTO;
 import musta.belmo.cody.model.ReservationDTO;
+import musta.belmo.cody.model.ReservationDetailsDTO;
 import musta.belmo.cody.model.RoomDTO;
 import musta.belmo.cody.model.SeatDTO;
 import musta.belmo.cody.service.api.exceptions.AdjacentSeatOccupiedException;
@@ -19,9 +24,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationServiceImpl extends AbstractCommonService implements ReservationService {
@@ -133,6 +140,35 @@ public class ReservationServiceImpl extends AbstractCommonService implements Res
 	public void freeReservationsInThePast() {
 		reservationQDSLRepository.freeReservationsInThePast();
 		
+	}
+	
+	@Override
+	public Set<ReservationDetailsDTO> getAll() {
+		final List<Reservation> reservations = reservationRepository.findAll();
+		return reservations.stream()
+				.map(reservation -> {
+					final ReservationDetailsDTO reservationDetailsDTO = new ReservationDetailsDTO();
+					
+					final User user = reservation.getUser();
+					final Seat seat = reservation.getSeat();
+					final Room room = seat.getRoom();
+					final Floor floor = room.getFloor();
+					
+					reservationDetailsDTO.setUser(user.getEmail());
+					reservationDetailsDTO.setTeam(user.getTeam().getName());
+					reservationDetailsDTO.setRoom(room.getName());
+					reservationDetailsDTO.setFloor(floor.getName());
+					
+					final String position = String.format("(%s,%s)", seat.getLineNumber(),
+							seat.getColumnNumber());
+					reservationDetailsDTO.setPosition(position);
+					final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
+					reservationDetailsDTO.setFrom(reservation.getStartsAt().format(dateTimeFormatter));
+					reservationDetailsDTO.setTo(reservation.getEndsAt().format(dateTimeFormatter));
+					
+					return reservationDetailsDTO;
+				})
+				.collect(Collectors.toSet());
 	}
 	
 	@Override
