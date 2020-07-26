@@ -22,19 +22,22 @@ Having Mysql installed, create a new database (schema) named `cody`.
 Then gather the connection string to this database, for example:  
 `jdbc:mysql://localhost:3306/cody?createDatabaseIfNotExist=true&useSSL=true`.
 After that note the username and the password to access this database. 
-2. Perform maven tasks
+1. Perform maven tasks
 Place the commande line to this directory : `battlebrain2020/code/back/`
 Run this maven command : 
 `mvn clean install`
-3. Then go to the generated folder `battlebrain2020/code/back/cody-runner/target` and find the built-up jar file. 
+1. Then go to the generated folder `battlebrain2020/code/back/cody-runner/target` and find the built-up jar file. 
 Then run the java command : 
 `java -jar cody_1.0.jar --server.port=8070 spring.datasource.username=[the user name of the created database]  --spring.datasource.password=[the set up password for your database`
-4. run this sql script to create the default user : 
+1. run this sql script to create the default user : 
+
 ```SQL
  INSERT INTO `cody`.`user` (`created_at`, `updated_at`, `email`, `password`, `team_id`) VALUES (null, null, 'test', '$2a$10$aL3BJmOMQEPPAaerlG8J9OBq7t4RcKNJlQIRI/ohu4McZ4xEzkDju', null)
 ```
-4. Go to `http://localhost:8070/swagger-ui.html`
 
-5.Connect to the swagger UI : user `test`, password `test`
+5. Go to `http://localhost:8070/swagger-ui.html`
+
+6.Connect to the swagger UI : user `test`, password `test`
+
 ## Missing artifacts:  
 1. Solution screencast
