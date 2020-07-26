@@ -14,7 +14,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity

@@ -1,18 +1,9 @@
 package musta.belmo.cody.rest.controller.seat;
 
-import com.querydsl.core.types.Predicate;
 import io.swagger.annotations.ApiOperation;
-import musta.belmo.cody.data.model.places.Seat;
-import musta.belmo.cody.model.SearchSeatDTO;
 import musta.belmo.cody.model.SeatDTO;
 import musta.belmo.cody.rest.annotation.IsMember;
 import musta.belmo.cody.service.api.exceptions.ContentNotFoundException;
-import musta.belmo.cody.service.api.seat.SeatService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.querydsl.binding.QuerydslPredicate;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;

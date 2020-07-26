@@ -5,7 +5,6 @@ import musta.belmo.cody.rest.RESTConstantes;
 import musta.belmo.cody.rest.controller.AbstractController;
 import musta.belmo.cody.rest.controller.swagger.SwaggerableController;
 import musta.belmo.cody.service.api.seat.FloorService;
-import musta.belmo.cody.service.api.seat.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.CrossOrigin;

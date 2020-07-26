@@ -2,7 +2,6 @@ package musta.belmo.cody.service.impl.reservation;
 
 import musta.belmo.cody.dao.reservation.ReservationQDSLRepository;
 import musta.belmo.cody.dao.reservation.ReservationRepository;
-import musta.belmo.cody.data.model.places.Seat;
 import musta.belmo.cody.data.model.scheduling.Reservation;
 import musta.belmo.cody.model.AbstractDTO;
 import musta.belmo.cody.model.ReservationDTO;

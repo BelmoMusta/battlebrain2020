@@ -1,6 +1,5 @@
 package musta.belmo.cody.service.impl.seat;
 
-import com.querydsl.core.types.Predicate;
 import musta.belmo.cody.dao.places.SeatRepository;
 import musta.belmo.cody.dao.places.qdsl.SeatQDSLRepository;
 import musta.belmo.cody.data.model.places.Seat;
@@ -13,8 +12,6 @@ import musta.belmo.cody.service.api.seat.RoomService;
 import musta.belmo.cody.service.api.seat.SeatService;
 import musta.belmo.cody.service.impl.AbstractCommonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -8,7 +8,6 @@ import musta.belmo.cody.dao.places.qdsl.SeatQDSLRepository;
 import musta.belmo.cody.data.model.places.QSeat;
 import musta.belmo.cody.data.model.places.Seat;
 import musta.belmo.cody.data.model.scheduling.QReservation;
-import musta.belmo.cody.data.model.scheduling.Reservation;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
