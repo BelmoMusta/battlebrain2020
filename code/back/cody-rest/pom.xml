@@ -5,7 +5,7 @@
     <parent>
         <artifactId>cody</artifactId>
         <groupId>musta.belmo</groupId>
-        <version>${project.version}</version>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -14,13 +14,13 @@
         <dependency>
             <groupId>musta.belmo</groupId>
             <artifactId>cody-data</artifactId>
-            <version>${project.version}</version>
+            <version>1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>musta.belmo</groupId>
             <artifactId>cody-service</artifactId>
-            <version>${project.version}</version>
+            <version>1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -37,7 +37,7 @@
         <dependency>
             <groupId>musta.belmo</groupId>
             <artifactId>cody-service-impl</artifactId>
-            <version>${project.version}</version>
+            <version>1.0</version>
             <scope>runtime</scope>
         </dependency>
 
