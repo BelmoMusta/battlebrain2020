@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 public class Seat extends AbstractDataModel {
-	private String content;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "room_id")
 	private Room room;
