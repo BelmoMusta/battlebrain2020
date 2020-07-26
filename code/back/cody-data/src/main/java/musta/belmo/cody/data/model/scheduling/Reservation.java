@@ -7,7 +7,6 @@ import musta.belmo.cody.data.model.places.Seat;
 import musta.belmo.cody.data.model.staff.User;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

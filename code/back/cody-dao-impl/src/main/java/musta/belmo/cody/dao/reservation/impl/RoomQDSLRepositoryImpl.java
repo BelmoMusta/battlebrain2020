@@ -1,7 +1,6 @@
 package musta.belmo.cody.dao.reservation.impl;
 
 import com.querydsl.core.types.dsl.EntityPathBase;
-import com.querydsl.jpa.impl.JPADeleteClause;
 import musta.belmo.cody.dao.impl.AbstractQDSLRepositoryImpl;
 import musta.belmo.cody.dao.places.qdsl.RoomQDSLRepository;
 import musta.belmo.cody.data.model.places.QRoom;
