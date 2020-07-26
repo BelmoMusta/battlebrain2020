@@ -7,6 +7,8 @@ import musta.belmo.cody.dao.places.qdsl.RoomQDSLRepository;
 import musta.belmo.cody.data.model.places.QRoom;
 import musta.belmo.cody.data.model.places.Room;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class RoomQDSLRepositoryImpl extends AbstractQDSLRepositoryImpl<Room> imp
 	
 	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public List<Room> getAllRoomsAtFloor(Long floorId) {
 		QRoom.room.floor.id.eq(floorId);
 		return getJpaQuery()

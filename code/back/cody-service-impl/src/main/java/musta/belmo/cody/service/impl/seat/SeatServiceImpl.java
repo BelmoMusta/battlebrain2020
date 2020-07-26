@@ -72,7 +72,6 @@ public class SeatServiceImpl extends AbstractCommonService implements SeatServic
 	}
 	
 	
-	
 	@Override
 	public List<SeatDTO> getAllSeatsAtFloor(Long floorId) {
 		return seatQDSLRepository.getAllSeatsAtFloor(floorId)
@@ -132,5 +131,13 @@ public class SeatServiceImpl extends AbstractCommonService implements SeatServic
 	@Override
 	public void delete(Long id) {
 		findOne(id).ifPresent(this::delete);
+	}
+	
+	@Override
+	public List<SeatDTO> getReservationsInAGivenRoom(Long roomId) {
+		return seatQDSLRepository.getReservationsInAGivenRoom(roomId)
+				.stream()
+				.map(domainDTOMapper::toDTO)
+				.collect(Collectors.toList());
 	}
 }

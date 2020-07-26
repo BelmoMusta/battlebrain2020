@@ -21,4 +21,6 @@ public interface SeatService extends AbstractCrudService<SeatDTO> {
     void createAtRoom(SeatDTO seat, Long roomId);
     
     List<SeatDTO> getAllSeatsForATeam(Long teamId);
+    
+    List<SeatDTO> getReservationsInAGivenRoom(Long roomId);
 }

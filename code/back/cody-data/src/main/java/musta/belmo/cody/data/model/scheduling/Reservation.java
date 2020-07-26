@@ -27,7 +27,7 @@ public class Reservation extends AbstractDataModel {
 	@Column
 	private LocalDateTime endsAt;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne()
 	@JoinColumn(name = "seat_id")
 	private Seat seat;
 	
