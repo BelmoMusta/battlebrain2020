@@ -16,7 +16,7 @@ import java.util.Set;
 public class ReservationControllerGET extends AbstractReservationController {
 	@GetMapping(value = "/" )
 	@ApiOperation("Gets all the details for the current reservations")
-	@IsMember
+	@IsAdmin
 	public ResponseEntity<Set<ReservationDetailsDTO>> getAll() {
 		return ResponseEntity.ok()
 				.body(reservationService.getAll());

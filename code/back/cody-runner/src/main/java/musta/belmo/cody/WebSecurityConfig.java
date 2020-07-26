@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().antMatchers("/user/registration").permitAll();
         http
                 .httpBasic()
                 .and()
@@ -37,11 +38,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .formLogin().disable();
-
+    
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/actuator/**")
                 .access("hasAuthority('ADMIN')");
+    
     }
 
     @Bean
