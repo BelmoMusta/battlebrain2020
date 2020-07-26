@@ -4,7 +4,9 @@ package musta.belmo.cody.service.impl.user;
 import musta.belmo.cody.dao.user.UserRepository;
 import musta.belmo.cody.data.model.staff.User;
 import musta.belmo.cody.mapper.DomainDTOMapper;
+import musta.belmo.cody.model.TeamDTO;
 import musta.belmo.cody.model.UserRegistrationDTO;
+import musta.belmo.cody.service.api.seat.TeamService;
 import musta.belmo.cody.service.api.user.RoleService;
 import musta.belmo.cody.service.api.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,6 +33,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleService roleService;
+    
+    @Autowired
+    private TeamService teamService;
 
     @Override
     public void save(UserRegistrationDTO user) {
@@ -59,8 +68,23 @@ public class UserServiceImpl implements UserService {
         }
         return findByEmail(userName);
     }
-
-    private void assignRoleToUser(String roleName, User user) {
+	
+	@Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void assingUserToATeam(Long teamId, String userMail) {
+        User user = userRepository.findByEmail(userMail);
+        Optional<TeamDTO> optionalTeamDTO = teamService.findOne(teamId);
+        if (optionalTeamDTO.isPresent()) {
+            user.setTeam(optionalTeamDTO
+                    .map(DomainDTOMapper::toDomain)
+                    .orElse(null));
+            userRepository.save(user);
+        }
+        
+        
+    }
+	
+	private void assignRoleToUser(String roleName, User user) {
         roleService.findByName(roleName)
                 .ifPresent(role -> {
                     user.getRoles().add(role);
