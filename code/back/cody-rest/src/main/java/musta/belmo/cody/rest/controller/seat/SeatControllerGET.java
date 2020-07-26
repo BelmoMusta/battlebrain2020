@@ -45,12 +45,12 @@ public class SeatControllerGET extends AbstractSeatController {
 		return seatService.getAllSeatsAtRoom(roomId);
 	}
 	
-	@GetMapping("/test/{id}")
-	@ApiOperation("gets a seat by its id")
+	
+	@GetMapping("/team/{teamId}")
+	@ApiOperation("gets a seat by its room id")
 	@IsMember
-	public SeatDTO findOnewhenNull(@PathVariable Long id) {
-		return seatService.findOne(null)
-				.orElseThrow(ContentNotFoundException::new);
+	public List<SeatDTO> getAllSeatsForATeam(@PathVariable Long teamId) {
+		return seatService.getAllSeatsForATeam(teamId);
 	}
 	
 	@GetMapping("/")

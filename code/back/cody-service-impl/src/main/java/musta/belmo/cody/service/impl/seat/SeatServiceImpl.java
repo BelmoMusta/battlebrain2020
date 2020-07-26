@@ -3,7 +3,6 @@ package musta.belmo.cody.service.impl.seat;
 import com.querydsl.core.types.Predicate;
 import musta.belmo.cody.dao.places.SeatRepository;
 import musta.belmo.cody.dao.places.qdsl.SeatQDSLRepository;
-import musta.belmo.cody.data.model.places.Room;
 import musta.belmo.cody.data.model.places.Seat;
 import musta.belmo.cody.data.model.staff.User;
 import musta.belmo.cody.model.RoomDTO;
@@ -113,6 +112,14 @@ public class SeatServiceImpl extends AbstractCommonService implements SeatServic
 		seat.setRoom(roomDTO);
 		final Seat seatDomain = domainDTOMapper.toDomain(seat);
 		create(seatDomain);
+	}
+	
+	@Override
+	public List<SeatDTO> getAllSeatsForATeam(Long teamId) {
+		return seatQDSLRepository.getAllSeatsForATeam(teamId)
+				.stream()
+				.map(domainDTOMapper::toDTO)
+				.collect(Collectors.toList());
 	}
 	
 	@Override

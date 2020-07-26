@@ -21,10 +21,5 @@ public class Team extends AbstractDataModel {
     
     @OneToMany(mappedBy = "team")
     private Set<User> members;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private User user;
     
 }

@@ -6,6 +6,7 @@ import musta.belmo.cody.dao.impl.AbstractQDSLRepositoryImpl;
 import musta.belmo.cody.dao.places.qdsl.SeatQDSLRepository;
 import musta.belmo.cody.data.model.places.QSeat;
 import musta.belmo.cody.data.model.places.Seat;
+import musta.belmo.cody.data.model.scheduling.QReservation;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,6 +23,15 @@ public class SeatQDSLRepositoryImpl extends AbstractQDSLRepositoryImpl<Seat> imp
 	public List<Seat> getAllSeatsAtRoom(Long roomId) {
 		return selectAllWhere(QSeat.seat.room.id.eq(roomId));
 		
+	}
+	
+	@Override
+	public List<Seat> getAllSeatsForATeam(Long teamId) {
+		final JPAQuery<Seat> jpaQuery = getJpaQuery();
+		
+		return jpaQuery.select(QReservation.reservation.seat)
+				.where(QReservation.reservation.user.team.id.eq(teamId))
+				.fetch();
 	}
 	
 	private List<Seat> selectAllWhere(BooleanExpression booleanExpressionFloorId) {
