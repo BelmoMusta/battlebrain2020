@@ -30,6 +30,8 @@ public class SeatQDSLRepositoryImpl extends AbstractQDSLRepositoryImpl<Seat> imp
 		final JPAQuery<Seat> jpaQuery = getJpaQuery();
 		
 		return jpaQuery.select(QReservation.reservation.seat)
+				.from(QReservation.reservation)
+				.join(QReservation.reservation.seat)
 				.where(QReservation.reservation.user.team.id.eq(teamId))
 				.fetch();
 	}
