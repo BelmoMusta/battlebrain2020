@@ -67,4 +67,6 @@ public interface SeatService extends AbstractCrudService<SeatDTO>, QuerydslBinde
     List<SeatDTO> getAllSeatsAtRoom(Long roomId);
     
     void createAtRoom(SeatDTO seat, Long roomId);
+    
+    List<SeatDTO> getAllSeatsForATeam(Long teamId);
 }

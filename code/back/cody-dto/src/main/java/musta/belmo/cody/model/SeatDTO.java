@@ -7,12 +7,12 @@ import lombok.Setter;
 @Setter
 public class SeatDTO extends AbstractDTO {
 	
-	private Integer line;
-	
 	private Integer lineNumber;
 	
 	private Integer columnNumber;
 	
 	private RoomDTO room;
+	
+	private boolean available;
 	
 }

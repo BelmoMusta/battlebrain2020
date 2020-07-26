@@ -5,12 +5,14 @@ import musta.belmo.cody.data.model.places.Room;
 import musta.belmo.cody.data.model.places.Seat;
 import musta.belmo.cody.data.model.scheduling.Reservation;
 import musta.belmo.cody.data.model.staff.Role;
+import musta.belmo.cody.data.model.staff.Team;
 import musta.belmo.cody.data.model.staff.User;
 import musta.belmo.cody.model.FloorDTO;
 import musta.belmo.cody.model.ReservationDTO;
 import musta.belmo.cody.model.RoleDTO;
 import musta.belmo.cody.model.RoomDTO;
 import musta.belmo.cody.model.SeatDTO;
+import musta.belmo.cody.model.TeamDTO;
 import musta.belmo.cody.model.UserDTO;
 
 public interface DTOMapperE {
@@ -26,4 +28,6 @@ public interface DTOMapperE {
 	RoomDTO toDTO(Room in);
 	
 	FloorDTO toDTO(Floor in);
+	
+	TeamDTO toDTO(Team in);
 }

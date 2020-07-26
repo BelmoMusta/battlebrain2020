@@ -8,6 +8,8 @@ public interface SeatQDSLRepository {
 	List<Seat> getAllSeatsAtFloor(Long floorId);
 	
 	List<Seat> getAllSeatsAtRoom(Long roomId);
+	
+	List<Seat> getAllSeatsForATeam(Long teamId);
 }
 	
 

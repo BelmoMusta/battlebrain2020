@@ -9,4 +9,7 @@ public class RESTConstantes {
 	
 	public static final String FLOOR = "Floor";
 	public static final String ROUTE_FLOOR = "/floor";
+	
+	public static final String TEAM = "Team";
+	public static final String ROUTE_TEAM = "/team";
 }
