@@ -2,8 +2,10 @@ package musta.belmo.cody.rest.controller.reservation;
 
 import io.swagger.annotations.ApiOperation;
 import musta.belmo.cody.model.ReservationDTO;
+import musta.belmo.cody.rest.annotation.IsAdmin;
 import musta.belmo.cody.rest.annotation.IsMember;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,15 @@ public class ReservationControllerPOST extends AbstractReservationController {
 	@IsMember
 	public ResponseEntity<Void> reserve(@RequestBody ReservationDTO reservationDTO) {
 		reservationService.reserve(reservationDTO);
+		return ResponseEntity.ok().build();
+		
+	}
+	
+	@DeleteMapping(value = "/free")
+	@ApiOperation("Frees the seats in the past")
+	@IsAdmin
+	public ResponseEntity<Void> freeReservationsInThePast() {
+		reservationService.freeReservationsInThePast();
 		return ResponseEntity.ok().build();
 		
 	}

@@ -1,10 +1,13 @@
 package musta.belmo.cody.dao.reservation.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.EntityPathBase;
 import com.querydsl.jpa.impl.JPAQuery;
 import musta.belmo.cody.dao.impl.AbstractQDSLRepositoryImpl;
 import musta.belmo.cody.dao.places.qdsl.SeatQDSLRepository;
+import musta.belmo.cody.data.model.places.QRoom;
 import musta.belmo.cody.data.model.places.QSeat;
+import musta.belmo.cody.data.model.places.Room;
 import musta.belmo.cody.data.model.places.Seat;
 import musta.belmo.cody.data.model.scheduling.QReservation;
 import org.springframework.stereotype.Repository;
@@ -40,5 +43,9 @@ public class SeatQDSLRepositoryImpl extends AbstractQDSLRepositoryImpl<Seat> imp
 				.from(QSeat.seat)
 				.where(booleanExpressionFloorId)
 				.fetch();
+	}
+	@Override
+	protected EntityPathBase<Seat> getEntityPathBase() {
+		return QSeat.seat;
 	}
 }

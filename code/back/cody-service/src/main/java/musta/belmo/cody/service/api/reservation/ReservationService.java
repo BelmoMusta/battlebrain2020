@@ -8,4 +8,6 @@ import java.time.LocalDateTime;
 public interface ReservationService extends AbstractCrudService<ReservationDTO>{
 	boolean checkAvailability(ReservationDTO reservationDTO);
 	void reserve(ReservationDTO reservationDTO);
+	
+	void freeReservationsInThePast();
 }

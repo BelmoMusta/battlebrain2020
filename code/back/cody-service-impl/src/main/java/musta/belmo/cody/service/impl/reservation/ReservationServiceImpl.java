@@ -14,7 +14,10 @@ import musta.belmo.cody.service.api.seat.SeatService;
 import musta.belmo.cody.service.impl.AbstractCommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -56,9 +59,10 @@ public class ReservationServiceImpl extends AbstractCommonService implements Res
 					.orElse(-1L);
 			final Optional<RoomDTO> optionalRoom = roomService.findOne(roomId);
 			if (optionalRoom.isPresent()) {
+				final List<SeatDTO> allSeatsAtRoom = seatService.getAllSeatsAtRoom(roomId);
 				final RoomDTO roomDTO = optionalRoom.get();
-				final int size = roomDTO.getSeats().size();
-				roomIsFull = (size - 1 < roomDTO.getMaxCapacity());
+				final int size = allSeatsAtRoom.size();
+				roomIsFull = (size - 1 == roomDTO.getMaxCapacity());
 				
 			}
 		}
@@ -78,6 +82,12 @@ public class ReservationServiceImpl extends AbstractCommonService implements Res
 		}
 		
 		
+	}
+	
+	@Override
+	public void freeReservationsInThePast() {
+		reservationQDSLRepository.freeReservationsInThePast();
+	
 	}
 	
 	@Override

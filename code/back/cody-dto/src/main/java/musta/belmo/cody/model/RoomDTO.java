@@ -14,4 +14,8 @@ public class RoomDTO extends AbstractDTO {
 	
 	private Set<SeatDTO> seats;
 	
+	private Integer maxLines;
+	
+	private Integer maxRows;
+	
 }

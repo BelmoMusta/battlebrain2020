@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import java.util.Set;
+import javax.persistence.Transient;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -22,8 +22,17 @@ public class Room extends AbstractDataModel {
 	@JoinColumn(columnDefinition = "floor_id")
 	private Floor floor;
 	
-	@OneToMany(mappedBy = "room")
-	private Set<Seat> seats;
+	private Integer maxLines;
 	
-	private Integer maxCapacity;
+	private Integer maxRows;
+	
+	@Transient
+	public Integer getMaxCapacity() {
+		Integer lines = Optional.ofNullable(maxLines)
+				.orElse(0);
+		
+		Integer rows = Optional.ofNullable(maxRows)
+				.orElse(0);
+		return (int) Math.ceil((rows * lines) /2.0);
+	}
 }
