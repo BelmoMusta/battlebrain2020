@@ -1,4 +1,4 @@
-package musta.belmo.cody.dao.seat;
+package musta.belmo.cody.dao.places;
 
 import musta.belmo.cody.dao.AbstractRepository;
 import musta.belmo.cody.dao.specifications.EqualsSpecification;

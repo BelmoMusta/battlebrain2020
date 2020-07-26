@@ -11,4 +11,5 @@ import javax.persistence.Entity;
 @Entity
 public class Floor extends AbstractDataModel {
 	private Integer number;
+	private String name; // a floor may have a name ?
 }
