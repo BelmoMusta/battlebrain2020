@@ -7,6 +7,8 @@ This solution is only (unfortunately) available as a REST API service.
 
 Some conditions leaded us to decide, that, it would be enough as a submission, knowing that, the aim of it is not to win a competition, but at least to finish a competition! 
 
+##Work Flow : https://trello.com/b/5duIc8jY/cody
+
 ## REQUIREMENTS : 
 1. Java 8 or above
 1. Maven 3.6.3 or above
@@ -27,3 +29,6 @@ Run this maven command :
 Then go to the generated folder target and find the built-up jar file. 
 Then run the java command : 
 java -jar  cody-1.0-jar-with-dependencies.jar
+
+## Missing artifacts:  
+1. Solution screencast
